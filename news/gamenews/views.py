@@ -4,3 +4,4 @@ from django.shortcuts import render
 
 def index(request: HttpRequest) -> HttpResponse:
     return render(request, "gamenews/home.html")
+
