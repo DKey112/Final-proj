@@ -87,6 +87,7 @@ TEMPLATES = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend', 
     'allauth.account.auth_backends.AuthenticationBackend',
+    # "graphql_jwt.backends.JSONWebTokenBackend"
     
 ]
 
@@ -99,7 +100,7 @@ WSGI_APPLICATION = 'news.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gamenews',
+        'NAME': 'news',
         'USER': 'gshop',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',
@@ -107,6 +108,12 @@ DATABASES = {
         }
     }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 
@@ -156,5 +163,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = "none"
-LOGIN_REDIRECT_URL = 'gamenews:home'
+LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_ON_GET = True
