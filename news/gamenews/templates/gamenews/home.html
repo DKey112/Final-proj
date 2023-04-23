@@ -13,15 +13,31 @@
         <p class="lead">All the games currently available for purchase.</p>
         </center>
     </div>
+    
+    {% for post in posts %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ post.author.profile.profile_image.url }}" width="90" height="110">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="card-text" href="#">{{ post.author }}</a>
+                <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'gamenews:post_detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content|safe }}</p>
+            </div>
+        </article>
+    {% endfor %}
 
     <div class="container">
         <div class="row">
+            {% for post in posts %}
             <div class="col-4">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="fallout4.jfif" alt="Card image cap">
+                    <img class="card-img-top" src="{{ post.author.profile.profile_image.url }}" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Fallout 4</h5>
-                        <p class="card-text">Game desc here.</p>
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
+                        <a class="card-title" href="">{{ post.author }}</a>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Rating: 9</li>
@@ -29,103 +45,9 @@
                         <li class="list-group-item">Price: 100 $</li>
                         <li class="list-group-item">Category: RPG</li>
                     </ul>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-success">Success</button>
-                    </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="4.jfif" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Fallout 4</h5>
-                        <p class="card-text">Game desc here.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Rating: 9</li>
-                        <li class="list-group-item">Release date: Jun 12</li>
-                        <li class="list-group-item">Price: 100 $</li>
-                        <li class="list-group-item">Category: RPG</li>
-                    </ul>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-success">Success</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="321.jfif" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Fallout 4</h5>
-                        <p class="card-text">Game desc here.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Rating: 9</li>
-                        <li class="list-group-item">Release date: Jun 12</li>
-                        <li class="list-group-item">Price: 100 $</li>
-                        <li class="list-group-item">Category: RPG</li>
-                    </ul>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-success">Success</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="fallout4.jfif" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Fallout 4</h5>
-                        <p class="card-text">Game desc here.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Rating: 9</li>
-                        <li class="list-group-item">Release date: Jun 12</li>
-                        <li class="list-group-item">Price: 100 $</li>
-                        <li class="list-group-item">Category: RPG</li>
-                    </ul>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-success">Success</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="4.jfif" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Fallout 4</h5>
-                        <p class="card-text">Game desc here.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Rating: 9</li>
-                        <li class="list-group-item">Release date: Jun 12</li>
-                        <li class="list-group-item">Price: 100 $</li>
-                        <li class="list-group-item">Category: RPG</li>
-                    </ul>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-success">Success</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="321.jfif" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Fallout 4</h5>
-                        <p class="card-text">Game desc here.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Rating: 9</li>
-                        <li class="list-group-item">Release date: Jun 12</li>
-                        <li class="list-group-item">Price: 100 $</li>
-                        <li class="list-group-item">Category: RPG</li>
-                    </ul>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-success">Success</button>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 

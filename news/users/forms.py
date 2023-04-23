@@ -4,6 +4,8 @@ from django.forms import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
+from .models import Profile
+
 
 class CustomPasswordChangeForm(PasswordChangeForm):
 
@@ -28,3 +30,16 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         else:
             return cleaned_data
 
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_image']

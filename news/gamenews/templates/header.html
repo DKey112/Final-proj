@@ -32,24 +32,28 @@
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+
             {% if request.user.is_authenticated %}
-                <li >
-                    <a  href="">{{user.username}} </a>
-                </li>
-                <li >
-                    <a  href="{% url 'users:logout' %}">Log out</a>
-                </li>
-                <li >
-                    <a  href="{% url 'users:change_password' %}">Change password</a>
-                </li>
-                
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="{% url 'users:user_profile' %}">Profile</a>
+                    <a class="dropdown-item" href="{% url 'gamenews:add_post' %}">Add New Post</a>
+                    <a class="dropdown-item" href="{% url 'users:change_password' %}">Change password</a>
+                    <a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a>
+                    
+                </div>
+            </ul>
             {% else %}
-                <li>
-                    <a href="{% url 'users:login' %}">Login</a>
-                </li>
-                <li >
-                    <a  href="{% url 'users:register' %}">Register</a>
-                </li>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">LogIn</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="{% url 'users:login' %}">LogIn</a>
+                    <a class="dropdown-item" href="{% url 'users:register' %}">Register</a>
+                </div>
+            </ul>
             {% endif %}
             
         </div>

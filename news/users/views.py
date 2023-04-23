@@ -1,13 +1,16 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse,reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
-from users.forms import CustomPasswordChangeForm
+
+from .models import Profile
+from .forms import CustomPasswordChangeForm, UserUpdateForm, ProfileUpdateForm
 
 # Create your views here.
 def user_login(request):
@@ -42,6 +45,21 @@ def user_logout(request):
     messages.success(request, ('See you later. Bye!!'))
     return redirect('gamenews:home')
 
+@login_required
+def user_profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your profile has been changed')
+            return redirect('users:user_profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+    context = {'u_form': u_form,'p_form': p_form}
+    return render(request, 'users/profile.html', context)
 
 
 class CustomPasswordChangeView(PasswordChangeView):
@@ -49,4 +67,3 @@ class CustomPasswordChangeView(PasswordChangeView):
     template_name='users/change_password.html'
     success_url = reverse_lazy('users:success_password')
     
-
