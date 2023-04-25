@@ -67,3 +67,4 @@ class CustomPasswordChangeView(PasswordChangeView):
     template_name='users/change_password.html'
     success_url = reverse_lazy('users:success_password')
     
+    

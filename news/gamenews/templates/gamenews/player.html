@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}Home Page{% endblock %}
+
+{% block content %}
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <center>
+        <h1>Cyber News</h1>
+        <p class="lead">All the games currently available for purchase.</p>
+        </center>
+    </div>
+<div class="container">
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <a href="{% url 'gamenews:post_detail' post.id %}">
+                    {%if post.post_pic%}
+                    <img  class="card-img-top" src="{{ post.post_pic.url }}" >
+                    {% else %}
+                    <img class="card-img-top" src="{{ post.author.profile.profile_image.url }}" alt="Card image cap">
+                    {%endif%}
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
+                    <a  href="">{{ post.author }}</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Rating: 9</li>
+                    <li class="list-group-item">Release date: Jun 12</li>
+                    <li class="list-group-item">Price: 100 $</li>
+                    <li class="list-group-item">Category: RPG</li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</main>

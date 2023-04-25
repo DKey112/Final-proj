@@ -3,6 +3,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
+from django.shortcuts import render, redirect
 
 from .models import Profile
 
@@ -24,7 +25,6 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         cleaned_data = super().clean()
         user = self.user
         new = cleaned_data.get('new_password1')
-        logout()
         if user.check_password(new):
             raise ValidationError('New password matches the old one!')
         else:

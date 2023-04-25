@@ -12,18 +12,22 @@
                     <a class="nav-link" href="#">Match</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Team and Players</a>
+                    <a class="nav-link" href="#">Teams</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Players</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Post and Cosplay</a>
                 </li>
+                {{for }}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cyber Sport Game</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Dota2</a>
-                        <a class="dropdown-item" href="#">CS GO</a>
-                        <a class="dropdown-item" href="#">Overwathc 2</a>
-                        <a class="dropdown-item" href="#">World of Warcraft</a>
+                        {%for item in game_menu%}
+                        <a class="dropdown-item" href="{% url 'gamenews:game' item|slugify %}">{{item}}</a>
+                        {%endfor%}
+                        
                     </div>
                 </li>
             </ul>

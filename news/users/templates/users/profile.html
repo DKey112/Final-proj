@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+
 <div class="container">
     <div class="row">
         <div class="col-8">
@@ -33,15 +34,18 @@
                 <h5 class="card-header">My Post</h5>
                 <div class="card-body">
                     
+                    {% for post in u_post %}
+                    <a  href="{% url 'gamenews:post_detail' post.pk %}"><p>{{ post.title }}<p></a>
+                    {% endfor %}
+                    
                     <a   href="{% url 'gamenews:add_post' %}" style="color:#000000; text-decoration:none">
                         <p>New post</p>
                     </a>
-                    {% for post in posts %}
-                    <a class="article-title" href="{% url 'gamenews:post_detail' user.post.id %}">{{ post.title }}</a>
-                    {% endfor %}
+                    
                 </div>
+                
             </div>
-
+                    
         </div>
     </div>
 </div>

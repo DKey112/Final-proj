@@ -3,24 +3,34 @@
 
 
 {%block content%}
-<div>
+<div >
     <article class="media content-section">
-        <img class="round" src="{{ post.author.profile.profile_image.url }}" width="85" height="100">
+        <img class="rounded-circle article-img" src="{{ post.author.profile.profile_image.url }}" width="85" height="100">
 
     <div class="media-body">
         <div class="article-metadata">
         <a class="mr-2" href="#">{{ post.author }}</a>
         <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
-        {% if post.author == user %}
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
             <div>
-                {% comment %} <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Редактировать</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Удалить</a> {% endcomment %}
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'gamenews:post_edit' post.id %}">Edit</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'gamenews:post_delete' post.pk %}">Delete</a> 
             </div>
+            {% endif %}
         {% endif %}
         </div>
         <h2 class="article-title">{{ post.title }}</h2>
+        {%if post.post_pic%}
+            <img  src="{{ post.post_pic.url }}" width="350" height="300">
+        {%endif%}
         <p class="article-content">{{ post.content|safe }}</p>
+
+        <div class="form-group">
+            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'gamenews:home' %}">Home Page</a>
+        </div>
     </div>
+    
 </div>
 
 

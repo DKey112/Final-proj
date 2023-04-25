@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.urls import reverse
+from PIL import Image
 
 class NewsInfoMixin(models.Model):
     slug = models.SlugField(max_length=50, verbose_name='Short Name')
@@ -16,7 +17,10 @@ class Game(NewsInfoMixin):
     release_date = models.DateField(auto_now_add=False, verbose_name='Release date')
     description = models.TextField(verbose_name='Game Description')
     game_image = models.ImageField(verbose_name='Game Image', upload_to='game_image', blank=True, null=True)
-
+    
+    def __str__(self) -> str:
+        return self.name
+        
 class Team(NewsInfoMixin):
     team_name = models.CharField(max_length=50, verbose_name='Team name')
     description = models.TextField(verbose_name='Description Team')
@@ -60,11 +64,21 @@ class Post(NewsInfoMixin):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = RichTextField(blank=True, null=True)
     pub_date = models.DateTimeField(auto_now_add=True)
-    post_pic = models.ImageField(verbose_name='Post pictures', upload_to='post_pic', blank=True, null=True)
-
+    post_pic = models.ImageField(verbose_name='Post pictures', default='default.jpg', upload_to='post_pic', blank=True, null=True)
+    game = models.ForeignKey(Game, verbose_name='Discipline ', on_delete=models.SET_DEFAULT, default=None, null=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('gamenews:post_detail', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        super(Post, self).save(*args, **kwargs)
+
+        img = Image.open(self.post_pic.path)
+    
+        if img.height > 600 or img.width > 500:
+            output_size = (600, 500)
+            img.thumbnail(output_size)
+            img.save(self.post_pic.path)

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}Home Page{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+    <div class="starter-template">
+        <center>
+        <h1>{{cats|capfirst}} Post</h1>
+        <p class="lead">Strong News</p>
+        </center>
+    </div>
+
+{%for post in posts_in_games%}
+
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ post.author.profile.profile_image.url }}" width="90" height="110">
+    <div class="media-body">
+    <div class="article-metadata">
+        <a class="card-text" href="#"style="color:#000000; text-decoration:none">{{ post.author }}</a>
+        <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
+    </div>
+    <h2><a class="lead" href="{% url 'gamenews:post_detail' post.id %}" style="color:#000000; text-decoration:none">{{ post.title }}</a></h2>
+    <p class="article-content">{{ post.content|safe }}</p>
+    </div>
+</article>
+
+{% endfor %}
+
+
+</main>
+{% endblock %}
