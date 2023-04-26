@@ -14,6 +14,7 @@
         </center>
     </div>
     
+    
     {% for post in posts %}
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.author.profile.profile_image.url }}" width="90" height="110">
@@ -35,9 +36,9 @@
                 <div class="card" style="width: 18rem;">
                     <a href="{% url 'gamenews:post_detail' post.id %}">
                         {%if post.post_pic%}
-                        <img  class="card-img-top" src="{{ post.post_pic.url }}" >
+                        <img  class="card-img-top" src="{{ post.post_pic.url }}" width="250" height="280" >
                         {% else %}
-                        <img class="card-img-top" src="{{ post.author.profile.profile_image.url }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ post.author.profile.profile_image.url }}" alt="Card image cap" >
                         {%endif%}
                     </a>
                     <div class="card-body">
@@ -54,6 +55,7 @@
         </div>
     </div>
 
-</main><!-- /.container -->
+{% comment %} </main><!-- /.container --> {% endcomment %}
+
 
 {% endblock %}

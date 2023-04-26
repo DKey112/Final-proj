@@ -6,7 +6,7 @@
     <center>
     <form action="" method="POST">
         {% csrf_token %}
-
+        <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
         <p class="block-text">
             <input type="text" name="username" placeholder="Username">
             <i></i>
@@ -16,11 +16,12 @@
             <i></i>
         </p>      
         <p class="submit">
-            <button type="submit" name="submit"><i>Submit</i></button>
+            <button type="submit" name="submit" class="btn btn-outline-success">Sing In</button>
         </p>
         {% comment %} <a href="{% url 'account_login' %}" >VK</a>
         <a href="{% url 'account_login' %}" >GitHub</a> {% endcomment %}
     </form>
+    No register? Sing up here:<a class="btn btn-light" href="{% url 'users:register' %}">Register</a></a>
 </center>
 </body>
 {% endblock %}

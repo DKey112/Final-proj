@@ -82,3 +82,17 @@ class Post(NewsInfoMixin):
             output_size = (600, 500)
             img.thumbnail(output_size)
             img.save(self.post_pic.path)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Post", related_name="comments")
+    author = models.ForeignKey(User,on_delete=models.CASCADE, verbose_name="Author comments",related_name="comments_author")
+    text = models.TextField(verbose_name="Text", max_length=280)
+    date_added = models.DateTimeField(verbose_name="Pub date", auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"{self.author} {self.post.title}"
+
+    def get_absolute_url(self):
+        return reverse("gamenews:post_detail", kwargs={"pk": self.post.pk})
+        

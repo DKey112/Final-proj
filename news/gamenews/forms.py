@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Game
+from .models import Post, Game, Comment
 
 choices = Game.objects.all().values_list('name','slug')
 choice_list= []
@@ -17,3 +17,12 @@ class PostForm(forms.ModelForm):
         'Post Pictures' : forms.ImageField(label=u'Post Pictures', widget=forms.FileInput(attrs={'multiple': 'multiple'}))
     }
     
+
+class CreateCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("text",)
+        widgets = {
+            "text": forms.Textarea(attrs={"class": "form-control"}
+            ),
+        }

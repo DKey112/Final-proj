@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from gamenews.models import Game, Player, Team, Post
+from gamenews.models import Game, Player, Team, Post, Comment
 from django.utils.html import mark_safe
 
 
@@ -15,8 +15,8 @@ class TeamAdmin(admin.ModelAdmin):
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
-    list_display = ('name','pub_date','img_preview',)
-    list_filter=('name',)
+    list_display = ('name','pub_date','img_preview','description',)
+    list_filter=('name','description',)
 
     @admin.display(description='game_image')
     def img_preview(self, obj):
@@ -36,3 +36,6 @@ class PlayerAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display=('id','title','author','pub_date','author_id',)
     
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display=('id','author','author_id','date_added','text',)

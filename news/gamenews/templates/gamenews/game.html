@@ -9,8 +9,15 @@
         <h1>{{cats|capfirst}} Post</h1>
         <p class="lead">Strong News</p>
         </center>
+        {%for game in game_inf%}
+        
+        <img  src="{{ game.game_image.url }}" >
+        <br>
+        <p class="article-content"><strong>Game History:</strong>{{game.description}}</p>
+        {%endfor%}
     </div>
-
+    
+    
 {%for post in posts_in_games%}
 
 <article class="media content-section">
