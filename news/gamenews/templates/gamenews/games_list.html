@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}Home Page{% endblock %}
+
+{% block content%}
+{{game}}
+{%for game in games%}
+    {{game.game_image.url}}
+{% endfor%}
+{% endblock %}
+

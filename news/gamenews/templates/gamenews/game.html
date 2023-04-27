@@ -10,11 +10,15 @@
         <p class="lead">Strong News</p>
         </center>
         {%for game in game_inf%}
-        
+        <center>
         <img  src="{{ game.game_image.url }}" >
+        </center>
         <br>
         <p class="article-content"><strong>Game History:</strong>{{game.description}}</p>
         {%endfor%}
+        <div class="form-group">
+            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'gamenews:home' %}">Home Page</a>
+        </div>
     </div>
     
     

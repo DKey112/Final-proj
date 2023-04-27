@@ -10,7 +10,8 @@ for item in choices:
 class PostForm(forms.ModelForm):
     class Meta:
         model=Post
-        fields = ('title', 'content','post_pic','game')
+        exclude=('likes',)
+        fields = ('title', 'content','post_pic','game', )
 
     widgets={
         'Discipline' : forms.Select(choices=choice_list, attrs={'class':'form-control'}),

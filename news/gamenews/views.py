@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.files.base import ContentFile
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
-
+from django.contrib.auth import authenticate
 # Forms
 from .forms import PostForm, CreateCommentForm
 
@@ -13,7 +13,7 @@ from .forms import PostForm, CreateCommentForm
 from .models import Post, Game, Comment
 
 
-def index(request: HttpRequest) -> HttpResponse:
+def all_game(request: HttpRequest) -> HttpResponse:
     context = {
         'posts': Post.objects.all()
     }
@@ -27,6 +27,7 @@ def GameView(request,cats,*args, **kwargs):
     game_inf = Game.objects.all()
     return render(request, "gamenews/game.html", 
     {'cats':cats, 'posts_in_games':posts_in_games,'game_inf':game_inf})
+    
 
 
 
@@ -54,6 +55,12 @@ class PostDetailView(DetailView):
     template_name = 'gamenews/post_detail.html'
     # context_object_name = 'posts'
 
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(PostDetailView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
+        return context
+
 
 
 class PostCreateView(LoginRequiredMixin, FormView):
@@ -68,6 +75,11 @@ class PostCreateView(LoginRequiredMixin, FormView):
         form.save()
         return super().form_valid(form)
 
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(PostCreateView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
+        return context
 
 class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -84,6 +96,11 @@ class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(UpdatePostView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
+        return context
 
 class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
@@ -95,6 +112,12 @@ class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+    
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(DeletePostView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
+        return context
 
 class CommentAddView(LoginRequiredMixin, CreateView):
     model = Comment
@@ -109,9 +132,10 @@ class CommentAddView(LoginRequiredMixin, CreateView):
         form.save()
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["text"] = "Add comment"
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(CommentAddView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
         return context
 
     
@@ -125,8 +149,9 @@ class UpdateCommentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = CreateCommentForm
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["text"] = "Change comment"
+        game_menu = Game.objects.all()
+        context = super(UpdateCommentView, self).get_context_data(**kwargs)
+        context["game_menu"] =  game_menu
         return context
 
     def form_valid(self, form):
@@ -169,3 +194,27 @@ def search_post(request):
         
     else:
         return render(request, 'gamenews/search_post.html') 
+        
+        
+
+    
+def post_likes(request, pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=pk)
+        if post.likes.filter(id=request.user.id):
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+        return redirect( request.META.get("HTTP_REFERER"))
+
+class GameListView(ListView):
+    model = Game
+    template_name = 'gamenews/games_list.html'
+    context_object_name = 'games'
+    
+
+    def get_context_data(self, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(GameListView, self).get_context_data(**kwargs)
+        context["game_menu"] =  game_menu
+        return context

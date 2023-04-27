@@ -66,11 +66,11 @@ class Post(NewsInfoMixin):
     pub_date = models.DateTimeField(auto_now_add=True)
     post_pic = models.ImageField(verbose_name='Post pictures', default='default.jpg', upload_to='post_pic', blank=True, null=True)
     game = models.ForeignKey(Game, verbose_name='Discipline ', on_delete=models.SET_DEFAULT, default=None, null=True)
+    likes = models.ManyToManyField(User, related_name="post_like", blank=True)
 
-
+    def count_of_like(self):
+        return self.likes.count()
     
-
-
 
     def __str__(self):
         return self.title

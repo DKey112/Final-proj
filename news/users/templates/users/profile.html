@@ -41,7 +41,9 @@
                     <br>
                     {% for post in u_post %}
                     <a href="{% url 'gamenews:post_detail' post.id %}" style="color:#000000; text-decoration:none">
-                        <p class="card-header">{{ post.title }}<p>
+                        <p class="card-header">{{ post.title }}  
+                            <small class="text-muted">{{post.count_of_like}} likes</small> 
+                        </p>
                     </a>
                     {% endfor %}
                     

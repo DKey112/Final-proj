@@ -24,7 +24,13 @@
                 <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
             </div>
             <h2><a class="lead" href="{% url 'gamenews:post_detail' post.id %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content|safe }}</p>
+            <p class="article-content">{{ post.content|safe }} 
+                <small class="text-muted">{{post.count_of_like}} likes</small>
+                {%if user in post.likes.all%}
+                <a href="{% url 'gamenews:likes' post.id%}"> unlike</a></p>
+                {%else%}
+                <a href="{% url 'gamenews:likes' post.id%}"> like</a></p>
+                {% endif %}
             </div>
         </article>
     {% endfor %}
@@ -42,12 +48,20 @@
                         {%endif%}
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
+                        <h4 class="card-title">{{ post.title }}</h4>
                         <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
                         <a  href="{% url 'users:user_profile'  %}" style="color:#000000; text-decoration:none">{{ post.author }}</a>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{ post.content|slice:":120"|safe }}</li>
+                        <li class="list-group-item">{{ post.content|slice:":120"|safe }} 
+                            <small class="text-muted">{{post.count_of_like}} likes</small>
+                            {%if user in post.likes.all%}
+                            <a class="btn btn-warning" href="{% url 'gamenews:likes' post.id%}">Unlike</a>
+                            {%else%}
+                            <a class="btn btn-success" href="{% url 'gamenews:likes' post.id%}">Like</a>
+                            {% endif %}
+                        </li>
+                        
                     </ul>
                 </div>
             </div>
