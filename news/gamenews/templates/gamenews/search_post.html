@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}Yoy search:{% endblock %}
+
+{% block content %}
+{% if searched %}
+<main role="main" class="container">
+    
+    <div class="starter-template">
+        <center>
+        <h1>You searche for {{searched}}</h1>
+        <p class="lead">All of you searched</p>
+        </center>
+    </div>
+
+    {% for post in posts %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ post.author.profile.profile_image.url }}" width="90" height="110">
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="card-text" href="#">{{ post.author }}</a>
+            <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
+        </div>
+        <h2><a class="lead" href="{% url 'gamenews:post_detail' post.id %}">{{ post.title }}</a></h2>
+        <p class="article-content">{{ post.content|safe }}</p>
+        </div>
+    </article>
+    {% endfor %}
+    {%for game in games%}
+    <a class="lead" href="{% url 'gamenews:game' game|slugify %}">{{ game.name }}</a>
+    {% endfor %}
+    </div>
+    {%else%}
+    <div class="starter-template">
+        <center>
+
+        <h1>You forgot what you were looking for....</h1>
+
+        </center>
+    </div> 
+    {%endif%}
+</main>
+
+{% endblock %}

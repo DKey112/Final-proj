@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, FormView, Upd
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.files.base import ContentFile
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 
 # Forms
 from .forms import PostForm, CreateCommentForm
@@ -156,3 +157,15 @@ class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context["text"] = "Delete comment"
         return context
+
+
+def search_post(request):
+    if request.method == 'POST':
+        print(request.POST)
+        searched = request.POST.get('searched', False)
+        posts = Post.objects.filter(title__icontains=searched)
+        games = Game.objects.filter(name__icontains= searched)
+        return render(request, 'gamenews/search_post.html', {'searched':searched,'posts':posts, 'games':games})
+        
+    else:
+        return render(request, 'gamenews/search_post.html') 

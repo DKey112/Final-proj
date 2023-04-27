@@ -18,4 +18,5 @@ urlpatterns = [
     path('comment/<int:pk>/update/', UpdateCommentView.as_view(), name='update_comment'),
     path('comment/<int:pk>/delete/', DeleteCommentView.as_view(), name='delete_comment'),
     path('game/<str:cats>/', GameView, name='game'),
+    path('search_post/', views.search_post, name='search_post'),
 ]
