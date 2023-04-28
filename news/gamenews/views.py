@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate
 from .forms import PostForm, CreateCommentForm
 
 # Project models
-from .models import Post, Game, Comment
+from .models import Post, Game, Comment, Player, Team
 
 
 def all_game(request: HttpRequest) -> HttpResponse:
@@ -28,7 +28,6 @@ def GameView(request,cats,*args, **kwargs):
     return render(request, "gamenews/game.html", 
     {'cats':cats, 'posts_in_games':posts_in_games,'game_inf':game_inf})
     
-
 
 
 class PostListView(ListView):
@@ -217,4 +216,55 @@ class GameListView(ListView):
         game_menu = Game.objects.all()
         context = super(GameListView, self).get_context_data(**kwargs)
         context["game_menu"] =  game_menu
+        return context
+    
+
+class PlayerListView(ListView):
+    model = Player
+    template_name = 'gamenews/players_list.html'
+    context_object_name = 'players_list'
+    cats = Game.objects.all()
+    ordering = ['nickname']
+
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(PlayerListView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
+        return context
+    
+class PlayerDetailView(DetailView):
+    model = Player
+    template_name = 'gamenews/player_detail.html'
+    
+
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(PlayerDetailView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
+        return context
+    
+
+class TeamListView(ListView):
+    model = Team
+    template_name = 'gamenews/teams_list.html'
+    context_object_name = 'teams_list'
+    cats = Game.objects.all()
+    ordering = ['team_name']
+
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(TeamListView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
+        return context
+    
+
+class TeamDetailView(DetailView):
+    model = Team
+    template_name = 'gamenews/team_detail.html'
+    
+
+    def get_context_data(self,*args, **kwargs):
+        game_menu = Game.objects.all()
+        context = super(TeamDetailView, self).get_context_data(*args, **kwargs)
+        context['game_menu'] = game_menu
         return context

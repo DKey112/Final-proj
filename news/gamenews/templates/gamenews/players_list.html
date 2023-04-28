@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}Home Page{% endblock %}
+
+{% block content %}
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <center>
+        <h1>Cybersportmens</h1>
+        <p class="lead"></p>
+        </center>
+    </div>
+<div class="container">
+    <div class="row">
+        {% for player in players_list %}
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <a href="{% url 'gamenews:player_detail' player.id %}">
+                    <img class="card-img-top" src="{{ player.player_pic.url }}" alt="Card image cap">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ player.nickname }}</h5>
+                    <small class="text-muted">{{ player.first_name }} {{ player.last_name }}</small>
+                    <a  href="">{{ player.team }}</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    
+                    <li class="list-group-item">Raiting: {{player.rating}}</li>
+                    <li class="list-group-item">Descipline: {{player.game}}</li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</main>
+{%endblock%}

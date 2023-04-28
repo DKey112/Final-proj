@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}Home Page{% endblock %}
+
+{% block content %}
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <center>
+        <h1>Cybersport Teams</h1>
+        <p class="lead"></p>
+        </center>
+    </div>
+<div class="container">
+    <div class="row">
+        {% for team in teams_list %}
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <a href="{% url 'gamenews:team_detail' team.id %}">
+                    <img class="card-img-top" src="{{ team.team_logo.url }}" alt="Card image cap" height="300" >
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ team.team_name }}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</main>
+{%endblock%}

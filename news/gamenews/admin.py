@@ -25,7 +25,7 @@ class GameAdmin(admin.ModelAdmin):
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
-    list_display=('nickname','team','rating','player_pic_preview',)
+    list_display=('nickname','team','rating','player_pic_preview','game',)
     list_filter=('rating',)
 
     @admin.display(description='player_pic')

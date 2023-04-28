@@ -11,6 +11,7 @@ class NewsInfoMixin(models.Model):
     class Meta:
         abstract = True
 
+    
 class Game(NewsInfoMixin):
     name = models.CharField(max_length=50, verbose_name='Game name')
     pub_date = models.DateField(auto_now_add=True, verbose_name='Publication date')
@@ -55,6 +56,7 @@ class Player(NewsInfoMixin):
     player_pic = models.ImageField(verbose_name='Player pictures', upload_to='player_pic', blank=True, null=True)
     bio = models.TextField(null=True, blank=True, verbose_name='Bio')
     rating = models.IntegerField(verbose_name='Player rating', null=True)
+    game = models.ForeignKey(Game, verbose_name='Discipline ', on_delete=models.SET_DEFAULT, default=None, null=True)
 
     def __str__(self):
         return self.nickname
@@ -84,7 +86,7 @@ class Post(NewsInfoMixin):
         img = Image.open(self.post_pic.path)
     
         if img.height > 600 or img.width > 500:
-            output_size = (600, 500)
+            output_size = (650, 500)
             img.thumbnail(output_size)
             img.save(self.post_pic.path)
 

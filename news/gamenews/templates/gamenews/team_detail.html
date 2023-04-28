@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+                
+        
+                <div>
+                    <h2 class="account-heading">History</h2>
+                    <p class="text-secondary">{{ team.description|linebreaks }}</p>
+                </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card">
+                <h5 class="card-header">{{ team.team_name }}</h5>
+                <div class="card-body">
+                    <img class="card-img-top" src="{{ team.team_logo.url }}" alt="Card image cap">
+                    <p class="card-header" >Name: {{ team.team_name }} <img src="{{team.team_logo.url}}" alt="Team Logo" width="18" height="30"></p>
+                    <p class="card-header">Create Date: {{ team.create_date}} </p>
+                    <p class="card-header">Discipline: {{team.game}} <img src="{{team.game.game_image.url}}" alt="Team Logo" width="18" height="30"></p>
+                </div>
+                
+            </div>
+                    
+        </div>
+        <input class="btn btn-outline-dark my-2 my-sm-0" type="button" onclick="history.back();" value="Back"/>
+    </div>
+</div>
+{% endblock %}

@@ -14,7 +14,7 @@
         <img  src="{{ game.game_image.url }}" >
         </center>
         <br>
-        <p class="article-content"><strong>Game History:</strong>{{game.description}}</p>
+        <p class="article-content"><strong>Game History:</strong>{{game.description|linebreaks}}</p>
         {%endfor%}
         <div class="form-group">
             <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'gamenews:home' %}">Home Page</a>
@@ -28,7 +28,7 @@
     <img class="rounded-circle article-img" src="{{ post.author.profile.profile_image.url }}" width="90" height="110">
     <div class="media-body">
     <div class="article-metadata">
-        <a class="card-text" href="#"style="color:#000000; text-decoration:none">{{ post.author }}</a>
+        <a class="card-text" href="{% url 'gamenews:post_detail' post.id %}" style="color:#000000; text-decoration:none">{{ post.author }}</a>
         <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
     </div>
     <h2><a class="lead" href="{% url 'gamenews:post_detail' post.id %}" style="color:#000000; text-decoration:none">{{ post.title }}</a></h2>

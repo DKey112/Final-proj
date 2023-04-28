@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+                
+        
+                <div>
+                    <h2 class="account-heading">Biography</h2>
+                    <p class="text-secondary">{{ player.bio|linebreaks }}</p>
+                </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card">
+                <h5 class="card-header">{{ player.nickname }}</h5>
+                <div class="card-body">
+                    <img class="card-img-top" src="{{ player.player_pic.url }}" alt="Card image cap">
+                    <p class="card-header" >Team: {{ player.team }} <img src="{{player.team.team_logo.url}}" alt="Team Logo" width="18" height="30"></p>
+                    <p class="card-header">First name: {{ player.first_name}} </p>
+                    <p class="card-header">Last name: {{player.last_name}}</p>
+                    
+                    <br>
+                    
+                </div>
+                
+            </div>
+                    
+        </div>
+    </div>
+</div>
+{% endblock %}
