@@ -13,7 +13,7 @@
                 <div>
                     <h2 class="account-heading">{{ user.username }}</h2>
                     <p class="text-secondary">{{ user.email }}</p>
-                    <p class="text-secondary">{{ user.profile.bio }}</p>
+                    {% comment %} <p class="text-secondary">{{ user.profile.bio }}</p> {% endcomment %}
                 </div>
         
 
@@ -42,7 +42,8 @@
                     {% for post in u_post %}
                     <a href="{% url 'gamenews:post_detail' post.id %}" style="color:#000000; text-decoration:none">
                         <p class="card-header">{{ post.title }}  
-                            <small class="text-muted">{{post.count_of_like}} likes</small> 
+                            <br>
+                            <small class="text-muted">{{post.count_of_like}} <img src="{% static 'images/Like.png' %}" height="15"></small> 
                         </p>
                     </a>
                     {% endfor %}

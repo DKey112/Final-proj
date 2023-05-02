@@ -18,7 +18,8 @@ class Game(NewsInfoMixin):
     release_date = models.DateField(auto_now_add=False, verbose_name='Release date')
     description = models.TextField(verbose_name='Game Description')
     game_image = models.ImageField(verbose_name='Game Image', upload_to='game_image', blank=True, null=True)
-    
+    post_amount = models.IntegerField(default=0)
+
     def __str__(self) -> str:
         return self.name
         

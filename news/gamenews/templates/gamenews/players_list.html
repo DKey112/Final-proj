@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ player.nickname }}</h5>
                     <small class="text-muted">{{ player.first_name }} {{ player.last_name }}</small>
-                    <a  href="">{{ player.team }}</a>
+                    <a  href="{% url 'gamenews:team_detail' player.team.id %}" style="color:#000000; text-decoration:none">{{ player.team }}</a>
                 </div>
                 <ul class="list-group list-group-flush">
                     
