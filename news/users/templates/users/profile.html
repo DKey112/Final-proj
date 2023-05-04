@@ -9,25 +9,15 @@
         <div class="col-8">
                 
                 <img src="{{ user.profile.profile_image.url}}" class="round"  alt='Profile image'>
-        
                 <div>
+                    
                     <h2 class="account-heading">{{ user.username }}</h2>
-                    <p class="text-secondary">{{ user.email }}</p>
-                    {% comment %} <p class="text-secondary">{{ user.profile.bio }}</p> {% endcomment %}
+                    <p class="card-header"><strong>@email:</strong> {{ user.email }}</p>
+                    <p class="card-header"><strong>Biography:</strong> {{ user.profile.bio }}</p>
+                    <a class="btn btn-outline-success" href="{% url 'users:user_profile_edit' %}">
+                        Edit Profile
+                    </a>
                 </div>
-        
-
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <h5 class="card-header">My Profile</h5>
-                {{ u_form|crispy }}
-                {{ p_form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Reset</button>
-            </div>
-        </form>
         </div>
 
         <div class="col-4">
@@ -36,7 +26,7 @@
                 <div class="card-body">
                     
                     <a href="{% url 'gamenews:add_post' %}" style="color:#000000; font-size:17px; text-decoration:none">
-                        <p class="card-header" >New post</p>
+                        <p class="card-header" >Create New Post</p>
                     </a>
                     <br>
                     {% for post in u_post %}

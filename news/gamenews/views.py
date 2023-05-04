@@ -24,9 +24,10 @@ def all_game(request: HttpRequest) -> HttpResponse:
 def GameView(request,cats,*args, **kwargs):
     game_post = get_object_or_404(Game, slug=cats)
     posts_in_games = Post.objects.filter(game=game_post)
-    game_inf = Game.objects.all()
+    game_inf = Game.objects.filter(slug=cats)
+    game_menu = Game.objects.all()
     return render(request, "gamenews/game.html", 
-    {'cats':cats, 'posts_in_games':posts_in_games,'game_inf':game_inf})
+    {'cats':cats, 'posts_in_games':posts_in_games,'game_inf':game_inf, 'game_menu':game_menu})
     
 
 
@@ -189,7 +190,11 @@ def search_post(request):
         searched = request.POST.get('searched', False)
         posts = Post.objects.filter(title__icontains=searched)
         games = Game.objects.filter(name__icontains= searched)
-        return render(request, 'gamenews/search_post.html', {'searched':searched,'posts':posts, 'games':games})
+        players = Player.objects.filter(nickname__icontains=searched)
+        teams = Team.objects.filter(team_name__icontains=searched)
+        game_menu = Game.objects.all()
+        return render(request, 'gamenews/search_post.html', {'searched':searched,'posts':posts, 'games':games,
+                                                            'players':players,'teams':teams,'game_menu':game_menu})
         
     else:
         return render(request, 'gamenews/search_post.html') 

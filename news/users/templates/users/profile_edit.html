@@ -12,8 +12,6 @@
         
                 <div>
                     <h2 class="account-heading">{{ user.username }}</h2>
-                    <p class="text-secondary">{{ user.email }}</p>
-                    <p class="text-secondary">{{ user.profile.bio }}</p>
                 </div>
         
 
@@ -25,7 +23,10 @@
                 {{ p_form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Reset</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Reset</button>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'users:user_profile' user.profile.id %}">
+                    Profile
+                </a>
             </div>
         </form>
         </div>
@@ -41,7 +42,10 @@
                     <br>
                     {% for post in u_post %}
                     <a href="{% url 'gamenews:post_detail' post.id %}" style="color:#000000; text-decoration:none">
-                        <p class="card-header">{{ post.title }}<p>
+                        <p class="card-header">{{ post.title }}  
+                            <br>
+                            <small class="text-muted">{{post.count_of_like}} <img src="{% static 'images/Like.png' %}" height="15"></small> 
+                        </p>
                     </a>
                     {% endfor %}
                     

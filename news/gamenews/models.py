@@ -57,6 +57,7 @@ class Player(NewsInfoMixin):
     player_pic = models.ImageField(verbose_name='Player pictures', upload_to='player_pic', blank=True, null=True)
     bio = models.TextField(null=True, blank=True, verbose_name='Bio')
     rating = models.IntegerField(verbose_name='Player rating', null=True)
+    achievement = models.CharField(max_length=200,default=None, null=True, verbose_name='Achievement')
     game = models.ForeignKey(Game, verbose_name='Discipline ', on_delete=models.SET_DEFAULT, default=None, null=True)
 
     def __str__(self):
@@ -67,7 +68,7 @@ class Post(NewsInfoMixin):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = RichTextField(blank=True, null=True)
     pub_date = models.DateTimeField(auto_now_add=True)
-    post_pic = models.ImageField(verbose_name='Post pictures', default='default.jpg', upload_to='post_pic', blank=True, null=True)
+    post_pic = models.ImageField(verbose_name='Post pictures', default='default_post_picture.png', upload_to='post_pic', blank=True, null=True)
     game = models.ForeignKey(Game, verbose_name='Discipline ', on_delete=models.SET_DEFAULT, default=None, null=True)
     likes = models.ManyToManyField(User, related_name="post_like", blank=True)
 

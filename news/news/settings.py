@@ -204,5 +204,19 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+#caches
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "D:\PythonCourse\Final-proj\cache_site",
+        "TIMEOUT": 60,
+        'OPTIONS': {
+            "binary": True,
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
+
 #https://django-crispy-forms.readthedocs.io/en/latest/crispy_tag_forms.html#fundamentals
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -27,11 +27,24 @@
         </div>
     </article>
     {% endfor %}
+    
     {%for game in games%}
-        <li><a class="lead" href="{% url 'gamenews:game' game|slugify %}" style="color:#000000; font-size:20px; text-decoration:none">{{ game.name }}</a></li>
+    <strong>Game:</strong>
+    <p class="lead"><a class="lead" href="{% url 'gamenews:game' game|slugify %}" style="color:#000000; font-size:20px; text-decoration:none">{{ game.name }}</a></p>
+    {% endfor %}
+    
+    {%for player in players%}
+    <strong>Player:</strong>
+    <p class="lead"> <a class="lead" href="{% url 'gamenews:player_detail' player.id %}" style="color:#000000; font-size:20px; text-decoration:none">{{ player.nickname }}</a></p>
+    {% endfor %}
+    
+    {%for team in teams%}
+    <strong>Team: </strong>
+    <p class="lead"><a class="lead" href="{% url 'gamenews:team_detail' team.id %}" style="color:#000000; font-size:20px; text-decoration:none">{{ team.team_name }}</a></p>
     {% endfor %}
     </div>
     {%else%}
+    
     <div class="starter-template">
         <center>
 

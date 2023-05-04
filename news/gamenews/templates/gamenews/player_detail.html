@@ -23,7 +23,9 @@
                     <p class="card-header" >Team:  <a  href="{% url 'gamenews:team_detail' player.team.id %}" style="color:#000000; text-decoration:none">{{ player.team }}</a> <img src="{{player.team.team_logo.url}}" alt="Team Logo" width="18" height="30"></p>
                     <p class="card-header">First name: {{ player.first_name}} </p>
                     <p class="card-header">Last name: {{player.last_name}}</p>
-                    
+                    <p class="card-header">Rating: {{player.rating}}</p>
+                    <p class="card-header">Discipline: {{player.game}}</p>
+                    <p class="card-header">Achievement: {{player.achievement}}</p>
                     <br>
                     
                 </div>
