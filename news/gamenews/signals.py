@@ -3,7 +3,7 @@ from django.dispatch import receiver
 
 from .models import Post
 
-
+# For counting posts related games 
 @receiver(post_save, sender=Post)
 def games_amount_post_save(sender, instance, created, *args, **kwargs):
     if created:

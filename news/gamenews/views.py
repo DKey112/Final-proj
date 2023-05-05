@@ -1,3 +1,4 @@
+# Default lib 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, FormView, UpdateView, DeleteView
@@ -20,7 +21,7 @@ def all_game(request: HttpRequest) -> HttpResponse:
     return render(request, "gamenews/home.html", context)
     
 
-
+#Function for view game in dropdown menu "Cyber Spot Game"
 def GameView(request,cats,*args, **kwargs):
     game_post = get_object_or_404(Game, slug=cats)
     posts_in_games = Post.objects.filter(game=game_post)
@@ -30,7 +31,7 @@ def GameView(request,cats,*args, **kwargs):
     {'cats':cats, 'posts_in_games':posts_in_games,'game_inf':game_inf, 'game_menu':game_menu})
     
 
-
+# Function to display all post
 class PostListView(ListView):
     model = Post
     template_name = 'gamenews/home.html'
@@ -50,6 +51,8 @@ class PostListView(ListView):
         context['u_post'] = u_post
         return context
 
+
+# Function to display a specific post 
 class PostDetailView(DetailView):
     model = Post
     template_name = 'gamenews/post_detail.html'
@@ -62,7 +65,7 @@ class PostDetailView(DetailView):
         return context
 
 
-
+# Function for create post
 class PostCreateView(LoginRequiredMixin, FormView):
     model = Post
     form_class = PostForm
@@ -81,6 +84,8 @@ class PostCreateView(LoginRequiredMixin, FormView):
         context['game_menu'] = game_menu
         return context
 
+
+# Function for update post
 class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'gamenews/post_update.html'
@@ -102,6 +107,8 @@ class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         context['game_menu'] = game_menu
         return context
 
+
+# Function to remove post
 class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'gamenews/post_delete.html'
@@ -119,6 +126,7 @@ class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         context['game_menu'] = game_menu
         return context
 
+# Function for create comment in post
 class CommentAddView(LoginRequiredMixin, CreateView):
     model = Comment
     template_name = "gamenews/add_comment.html"
@@ -141,7 +149,7 @@ class CommentAddView(LoginRequiredMixin, CreateView):
     
     
 
-
+# Function for update comment in post
 class UpdateCommentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
     context_object_name = "comment"
@@ -166,6 +174,7 @@ class UpdateCommentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+# Function for remove comment in post
 class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     context_object_name = "comment"
@@ -184,6 +193,7 @@ class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return context
 
 
+# Function for searching data
 def search_post(request):
     if request.method == 'POST':
         print(request.POST)
@@ -201,7 +211,7 @@ def search_post(request):
         
         
 
-    
+# Function for add like in the post 
 def post_likes(request, pk):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=pk)
@@ -211,6 +221,7 @@ def post_likes(request, pk):
             post.likes.add(request.user)
         return redirect( request.META.get("HTTP_REFERER"))
 
+# Function to display all games 
 class GameListView(ListView):
     model = Game
     template_name = 'gamenews/games_list.html'
@@ -224,6 +235,7 @@ class GameListView(ListView):
         return context
     
 
+# Function to display all players
 class PlayerListView(ListView):
     model = Player
     template_name = 'gamenews/players_list.html'
@@ -237,6 +249,7 @@ class PlayerListView(ListView):
         context['game_menu'] = game_menu
         return context
     
+# Function to display player profile
 class PlayerDetailView(DetailView):
     model = Player
     template_name = 'gamenews/player_detail.html'
@@ -249,6 +262,7 @@ class PlayerDetailView(DetailView):
         return context
     
 
+#Function to display all teams 
 class TeamListView(ListView):
     model = Team
     template_name = 'gamenews/teams_list.html'
@@ -262,7 +276,8 @@ class TeamListView(ListView):
         context['game_menu'] = game_menu
         return context
     
-
+    
+# Function to display team profile
 class TeamDetailView(DetailView):
     model = Team
     template_name = 'gamenews/team_detail.html'

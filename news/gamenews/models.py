@@ -82,6 +82,7 @@ class Post(NewsInfoMixin):
     def get_absolute_url(self):
         return reverse('gamenews:post_detail', kwargs={'pk': self.pk})
 
+    #For set default size pictures 
     def save(self, *args, **kwargs):
         super(Post, self).save(*args, **kwargs)
 

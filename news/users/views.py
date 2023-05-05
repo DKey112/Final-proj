@@ -30,7 +30,7 @@ def user_login(request):
     else:
         return render(request,'users/login.html')
 
-## Function for registration new user
+# Function for registration new user
 def user_register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

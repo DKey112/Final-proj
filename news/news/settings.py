@@ -50,14 +50,14 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'ckeditor',
 
-    #
+    #Other special lib
     'crispy_forms',
     'debug_toolbar',
 
     #Project apps 
     'gamenews.apps.GamenewsConfig',
     'users.apps.UsersConfig',
-    # 'api.apps.ApiConfig',
+    
 
 ]
 
@@ -188,6 +188,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static')]
 
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -199,13 +202,15 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_ON_GET = True
 
+
+
 #debug toolbar
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-#caches
 
+#caches
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
@@ -218,5 +223,7 @@ CACHES = {
     }
 }
 
+
+# Bootstrap 
 #https://django-crispy-forms.readthedocs.io/en/latest/crispy_tag_forms.html#fundamentals
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
