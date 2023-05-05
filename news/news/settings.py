@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     #Project apps 
     'gamenews.apps.GamenewsConfig',
     'users.apps.UsersConfig',
-    'api.apps.ApiConfig',
+    # 'api.apps.ApiConfig',
 
 ]
 
