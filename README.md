@@ -6,6 +6,7 @@
   <li>Is a blog site that allows users to share their thoughts and knowledge with others.</li>
 </ul>
 
+<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
 
 <h3>Tech Stack</h3>
 
