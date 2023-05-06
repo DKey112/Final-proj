@@ -1,7 +1,7 @@
 <h1 align="center">Graduation_Project 📝</h1>
 
 <ul>
-  <li>my graduation project.</li>
+  <li>Hi <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/>, my graduation project.</li>
 
   <li>Is a blog site that allows users to share their thoughts and knowledge with others.</li>
 </ul>
