@@ -65,8 +65,7 @@ python manage.py runserver
 ## Result
 Screenshot that displays the result.
 <p align="center">
-<img src="https://github.com/DKey112/Graduational_project/tree/main/image_for_readme/for_readme.png"  width="350" alt="Main page"/>
-[Main Page](https://github.com/DKey112/Graduational_project/raw/main/image_for_readme/for_readme.png)
+<img src="https://github.com/DKey112/Graduational_project/blob/main/image_for_readme/for_readme.png"  width="800" alt="Main page"/>
 </p>
 
 ## Used resources
