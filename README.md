@@ -1,87 +1,72 @@
-<h1 align="center">Graduation_Project 📝</h1>
+<h1 align="center">Diploma Project📝</h1>
 
 <ul>
-  <li>my graduation project.</li>
-
-  <li>Is a blog site that allows users to share their thoughts and knowledge with others.</li>
+  Hi <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/>, I'm Denis and this is my 
+   diploma project.
 </ul>
 
+<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
 
-<h3>Tech Stack</h3>
+<h3>The goal of the project</h3>
+  The main goal of the project is to develop an app with information about cybersport.
+
+<h3>Built With</h3>
 
 <ul>
-  <li>Frontend: HTML/CSS/Bootstrap</li>
-  <li>Backend: Django</li>
+  <h4>Frontend:</h4>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>Bootstrap</li>
+  <h4>Backend:</h4>
+  <li>Django</li>
 </ul>
 
-## Quick Start
+## Start
 
-- Fork and Clone the repository using-
+- Download project or clone repository
 ```
-
+https://github.com/DKey112/Graduational_project.git
 ```
-- Create a Branch- 
+- Create virtual environment in Linux system-
 ```
-git checkout -b <branch_name>
-```
-- Create virtual environment-
-```
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 ```
-- Headover to Project Directory- 
+- Create virtual environment in Wimdows system-
 ```
-cd blogproject
+python -m venv .venv
+.venv\Scripts\activate
 ```
-- Install dependencies-
-- This command will install all dependencies from requirements.txt
+- In Linux system install all dependencies from requirements.txt
 ```
 make install
+```
+- In Windows system install all dependecies from requirements.txt
+```
+pip install -r requirements.txt
+```
+- We need to create a postgresql database  -
+- <a href="https://www.postgresql.org/docs/current/sql-createdatabase.html">How to create database</a>
+- <a href="https://docs.djangoproject.com/en/4.2/ref/databases/">How to connect database</a>
+
+- We need to make migrations-
+```
+ python manage.py makemigrations
+ python manage.py migrate
+```
+- Need to create a superuser-
+```
+ python manage.py createsuperuser
+```
+- Need to run server using-
+```
+python manage.py runserver
+```
 
 
-```
-- Сreate .env file with variables-
-```
-DEBUG=True
-
-SECRET_KEY=[YOUR SECRET KEY]
-```
-- To use postgresql database you need to create 2 files-
-- <a href="https://docs.djangoproject.com/en/4.2/ref/databases/#postgresql-notes">Django Docs</a>
-
-create a file .pg_service.conf
-```
-[my_service]
-host=localhost
-user=USER
-dbname=NAME
-port=5432
-```
-and file .pgpass
-```
-localhost:5432:NAME:USER:PASSWORD
-```
-- Make migrations using-
-```
-make migrate
-```
-- Create a superuser-
-```
-make superuser
-```
-- Run server using-
-```
-make run
-```
-- Push Changes-
-```
-git add .
-git commit -m "<your commit message>"
-git push --set-upstream origin <branch_name>
-```
-
-## Useful Resources to Learn
+## Used resources
 
 - [Django Docs](https://docs.djangoproject.com/en/4.2/)
-- [Bootstrap Docs](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+- [PostgreSQL](https://www.postgresql.org/docs/current/sql-createdatabase.html)
+- [Metanit](metanit.com)
 - [Git and GitHub](https://www.digitalocean.com/community/tutorials/how-to-use-git-a-reference-guide) 
