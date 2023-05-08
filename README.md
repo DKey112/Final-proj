@@ -62,7 +62,11 @@ pip install -r requirements.txt
 ```
 python manage.py runserver
 ```
-
+## Result
+Screenshot that displays the result.
+<p align="center">
+<img src="https://github.com/DKey112/Graduational_project/blob/main/image_for_readme/for_readme.png"  width="800" alt="Main page"/>
+</p>
 
 ## Used resources
 
