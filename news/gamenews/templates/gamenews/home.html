@@ -33,6 +33,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">{{ post.content|slice:":120"|safe }} 
+                        </br>
                             <small class="text-muted">{{post.count_of_like}} <img src="{% static 'images/Like.png' %}" height="15"></small>
                             {% if request.user.is_authenticated %}
                             {%if user in post.likes.all%}

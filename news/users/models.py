@@ -11,6 +11,7 @@ class Profile(models.Model):
     def __str__(self) -> str:
         return str(self.user)
         
+# Default set profile picture
     def save(self, *args, **kwargs):
         super(Profile,self).save(*args, **kwargs)
 
