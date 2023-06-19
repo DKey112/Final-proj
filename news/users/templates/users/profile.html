@@ -14,6 +14,16 @@
                     <h2 class="account-heading">{{ user.username }}</h2>
                     <p class="card-header"><strong>@email:</strong> {{ user.email }}</p>
                     <p class="card-header"><strong>Biography:</strong> {{ user.profile.bio }}</p>
+                    <div>
+                        <h4>My Favourite Post</h4>
+                        {% for favourite in favourites %}
+                        <p>
+                            <strong>
+                            <a href="{% url 'gamenews:post_detail' favourite.id %}" style="color:#000000; text-decoration:none">{{favourite}}</a>
+                            </strong>
+                        <p/>
+                        {%endfor%}
+                    </div>
                     <a class="btn btn-outline-success" href="{% url 'users:user_profile_edit' %}">
                         Edit Profile
                     </a>
@@ -24,7 +34,7 @@
             <div class="card">
                 <h5 class="card-header">My Post</h5>
                 <div class="card-body">
-                    
+                    {% comment %} new post {% endcomment %}
                     <a href="{% url 'gamenews:add_post' %}" style="color:#000000; font-size:17px; text-decoration:none">
                         <p class="card-header" >Create New Post</p>
                     </a>

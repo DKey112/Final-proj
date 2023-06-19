@@ -26,7 +26,7 @@ class Game(NewsInfoMixin):
 class Team(NewsInfoMixin):
     team_name = models.CharField(max_length=50, verbose_name='Team name')
     description = models.TextField(verbose_name='Description Team')
-    game = models.ForeignKey(Game, verbose_name='Discipline ', on_delete=models.SET_DEFAULT, default=None, null=True)
+    game = models.ForeignKey(Game, verbose_name='Discipline ', on_delete=models.SET_NULL, default=None, null=True)
     create_date = models.DateField(auto_now_add=False, verbose_name='Create date')
     team_logo = models.ImageField(verbose_name='Team Logo', upload_to='team_logo', blank=True, null=True)
     
@@ -83,15 +83,15 @@ class Post(NewsInfoMixin):
         return reverse('gamenews:post_detail', kwargs={'pk': self.pk})
 
     #For set default size pictures 
-    def save(self, *args, **kwargs):
-        super(Post, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     super(Post, self).save(*args, **kwargs)
 
-        img = Image.open(self.post_pic.path)
+    #     img = Image.open(self.post_pic.path)
     
-        if img.height > 600 or img.width > 500:
-            output_size = (650, 500)
-            img.thumbnail(output_size)
-            img.save(self.post_pic.path)
+    #     if img.height > 600 or img.width > 500:
+    #         output_size = (650, 500)
+    #         img.thumbnail(output_size)
+    #         img.save(self.post_pic.path)
 
 
 class Comment(models.Model):

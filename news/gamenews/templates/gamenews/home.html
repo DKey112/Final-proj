@@ -27,7 +27,7 @@
                         {%endif%}
                     </a>
                     <div class="card-body">
-                        <h4 class="card-title">{{ post.title }}</h4>
+                        <h4 class="card-title">{{ post.title|slice:":60"|safe }}</h4>
                         <small class="text-muted">{{ post.pub_date|date:"F d, Y" }}</small>
                         <p>{{ post.author }}</p>
                     </div>
@@ -36,11 +36,13 @@
                         </br>
                             <small class="text-muted">{{post.count_of_like}} <img src="{% static 'images/Like.png' %}" height="15"></small>
                             {% if request.user.is_authenticated %}
+                            
                             {%if user in post.likes.all%}
                             <a class="btn btn-warning" href="{% url 'gamenews:likes' post.id%}">Dislike</a>
                             {%else%}
                             <a class="btn btn-success" href="{% url 'gamenews:likes' post.id%}">Like</a>
                             {% endif %}
+                            <a href="{% url 'gamenews:favourite' post.id %}"><img src="{% static 'images/favourite.png' %}" height="15"></a>
                             {% endif %}
                         </li>
                         

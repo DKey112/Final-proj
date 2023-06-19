@@ -28,6 +28,7 @@
         
         <h3 class="article-title">Comments</h3>
         <div>
+            {% if request.user.is_authenticated %}
         {%if not post.comments.all%}
             No comments yet... <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'gamenews:add_comment' post.id %}">Add One</a>
         {%else%}
@@ -49,6 +50,7 @@
                 
                 
             {% endfor%}
+        {%endif%}
         {%endif%}
         </div>
 

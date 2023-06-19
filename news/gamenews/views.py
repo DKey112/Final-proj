@@ -7,11 +7,17 @@ from django.core.files.base import ContentFile
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 # Forms
 from .forms import PostForm, CreateCommentForm
 
 # Project models
 from .models import Post, Game, Comment, Player, Team
+
+
+#User models
+from users.models import Profile
+
 
 
 def all_game(request: HttpRequest) -> HttpResponse:
@@ -22,7 +28,7 @@ def all_game(request: HttpRequest) -> HttpResponse:
     
 
 #Function for view game in dropdown menu "Cyber Spot Game"
-def GameView(request,cats,*args, **kwargs):
+def game_view(request,cats,*args, **kwargs):
     game_post = get_object_or_404(Game, slug=cats)
     posts_in_games = Post.objects.filter(game=game_post)
     game_inf = Game.objects.filter(slug=cats)
@@ -212,6 +218,7 @@ def search_post(request):
         
 
 # Function for add like in the post 
+@login_required
 def post_likes(request, pk):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=pk)
@@ -220,6 +227,19 @@ def post_likes(request, pk):
         else:
             post.likes.add(request.user)
         return redirect( request.META.get("HTTP_REFERER"))
+
+@login_required
+def favourite(request, pk):
+    user = request.user.id
+    post = get_object_or_404(Post, id=pk)
+    profile = Profile.objects.get(user=user)
+    if profile.favourite.filter(id=pk).exists():
+        profile.favourite.remove(post)
+    else:
+        profile.favourite.add(post)
+    return redirect( request.META.get("HTTP_REFERER"))
+
+
 
 # Function to display all games 
 class GameListView(ListView):

@@ -32,6 +32,7 @@ def user_login(request):
 
 # Function for registration new user
 def user_register(request):
+    form = UserCreationForm()
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -39,8 +40,6 @@ def user_register(request):
             login(request, user,  backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, "Your registration is successful")
             return redirect(reverse("gamenews:home"))
-    else:
-        form = UserCreationForm()
     return render(request, 'users/register.html', {'form': form})
 
 def user_logout(request):
@@ -58,6 +57,7 @@ class ProfileView(DetailView):
         context = super(ProfileView, self).get_context_data(**kwargs)
         context["u_post"] = Post.objects.filter(author=self.object.user)
         context['game_menu'] = Game.objects.all()
+        context['favourites'] =  self.object.favourite.all()
         return context
     
 
