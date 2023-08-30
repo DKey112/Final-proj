@@ -10,6 +10,7 @@ __pycache__/
 .Python
 build/
 media/
+.vscode
 cache_site/
 develop-eggs/
 dist/

@@ -3,6 +3,7 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
+from django.http import request
 
 class NewsInfoMixin(models.Model):
     slug = models.SlugField(max_length=50, verbose_name='Short Name')
